@@ -77,7 +77,7 @@
                             <i class="fa-solid fa-person text-4xl"></i>
                         </div>
 
-                        <h1 class="text-6xl font-[700]">1,238</h1>
+                        <h1 class="text-6xl font-[700]">24</h1>
                         <p class="text-base">Running This Elections</p>
                     </div>
                 </div>
