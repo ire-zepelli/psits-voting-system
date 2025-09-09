@@ -80,8 +80,7 @@
                             <thead class="bg-gray-100">
                                 <tr>
                                     <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Position</th>
                                     <th>Manifesto</th>
                                     <th>Poster</th>
@@ -89,41 +88,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- row 1 -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>Juan</td>
-                                    <td>Dela Cruz</td>
-                                    <td>President</td>
-                                    <td class="max-w-xs truncate">
-                                        My vision is to improve student engagement through...
-                                    </td>
-                                    <td>
-                                        <img src="poster1.jpg" alt="Candidate Poster" class="w-16 h-16 object-cover rounded-md border" />
-                                    </td>
-                                    <td class="flex gap-2">
-                                        <button id="edit_btn" class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-secondary btn-sm">Delete</button>
-                                    </td>
-                                </tr>
+                                <?php
+                                include "../db_connect.php";
 
-                                <!-- Example row 2 -->
-                                <tr>
-                                    <td>2</td>
-                                    <td>Maria</td>
-                                    <td>Santos</td>
-                                    <td>Secretary</td>
-                                    <td class="max-w-xs truncate">
-                                        Transparency and accountability are my priorities...
-                                    </td>
-                                    <td>
-                                        <img src="poster2.jpg" alt="Candidate Poster" class="w-16 h-16 object-cover rounded-md border" />
-                                    </td>
-                                    <td class="flex gap-2">
-                                        <button id="edit_btn" class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-secondary btn-sm">Delete</button>
-                                    </td>
-                                </tr>
+                                // Adjust column names to match your actual DB schema
+                                $sql = "
+SELECT 
+    c.candidate_id,
+    c.name as candidate_name,
+    pos.title AS position_name,
+    pa.party_name,
+    c.manifesto,
+    c.poster
+FROM Candidates c
+JOIN Positions pos ON c.position_id = pos.position_id
+JOIN Parties pa ON c.party_id = pa.party_id
+";
+
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>{$row['candidate_id']}</td>";
+                                        echo "<td>{$row['candidate_name']}</td>";
+                                        echo "<td>{$row['position_name']}</td>"; // from Positions
+                                        echo "<td class='max-w-xs truncate'>{$row['manifesto']}</td>";
+                                        echo "<td><img src='../public/{$row['poster']}' alt='Poster' class='w-16 h-16 object-cover rounded-md border'></td>";
+                                        echo "<td class='flex gap-2'>
+                <button class='btn btn-primary btn-sm edit-btn' data-id='{$row['candidate_id']}'>Edit</button>
+                <button class='btn btn-secondary btn-sm delete-btn' data-id='{$row['candidate_id']}'>Delete</button>
+              </td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center'>No candidates registered yet.</td></tr>";
+                                }
+
+                                $conn->close();
+                                ?>
                             </tbody>
                         </table>
                     </div>

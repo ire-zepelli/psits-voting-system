@@ -22,6 +22,7 @@
     <?php
     include "addpartylist.php";
     include "editpartylist.php";
+
     ?>
     <div class="drawer">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
@@ -74,7 +75,11 @@
                             <i class="fa-solid fa-people-group text-4xl"></i>
                         </div>
 
-                        <h1 class="text-6xl font-[700]">2</h1>
+                        <h1 class="text-6xl font-[700]">
+                            <?php
+                            include "countparties.php";
+                            ?>
+                        </h1>
                         <p class="text-base">Registered This Elections</p>
                     </div>
                 </div>
@@ -88,7 +93,11 @@
                             <i class="fa-solid fa-people-group text-4xl"></i>
                         </div>
 
-                        <h1 class="text-6xl font-[700]">24</h1>
+                        <h1 class="text-6xl font-[700]">
+                            <?php
+                            include "countcandidates.php";
+                            ?>
+                        </h1>
                         <p class="text-base">Registered This Elections</p>
                     </div>
                 </div>
@@ -110,7 +119,7 @@
                             <!-- head -->
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Party ID</th>
                                     <th>Party Name</th>
                                     <th>Abbreviation</th>
                                     <th>Description</th>
@@ -119,45 +128,53 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Example Row 1 -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>Equality Initiative</td>
-                                    <td>E.I.</td>
-                                    <td class="max-w-xs truncate">
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, incidunt nulla ipsum, nobis reprehenderit.
-                                    </td>
-                                    <td>
-                                        <img src="ei-logo.png" alt="Party Logo" class="w-16 h-16 object-cover rounded-md border" />
-                                    </td>
-                                    <td class="flex gap-2">
-                                        <button id="edit_btn" class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-secondary btn-sm">Delete</button>
-                                    </td>
-                                </tr>
+                                <?php
+                                include "../db_connect.php";
 
-                                <!-- Example Row 2 -->
-                                <tr>
-                                    <td>2</td>
-                                    <td>Student Progress Alliance</td>
-                                    <td>SPA</td>
-                                    <td class="max-w-xs truncate">
-                                        A student-led movement focused on academic development and leadership growth.
-                                    </td>
-                                    <td>
-                                        <img src="spa-logo.png" alt="Party Logo" class="w-16 h-16 object-cover rounded-md border" />
-                                    </td>
-                                    <td class="flex gap-2">
-                                        <button id="edit_btn" class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-secondary btn-sm">Delete</button>
-                                    </td>
-                                </tr>
+                                $sql = "SELECT party_id, party_name, description, party_img FROM Parties";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        // Generate abbreviation (first letters of each word)
+                                        $abbr = "";
+                                        foreach (explode(" ", $row['party_name']) as $word) {
+                                            $abbr .= strtoupper($word[0]);
+                                        }
+
+                                        echo "<tr>";
+                                        echo "<td>{$row['party_id']}</td>";
+                                        echo "<td>{$row['party_name']}</td>";
+                                        echo "<td>{$abbr}</td>";
+                                        echo "<td class='max-w-xs truncate'>{$row['description']}</td>";
+                                        echo "<td><img src='../public/{$row['party_img']}' alt='Party Logo' class='w-16 h-16 object-cover rounded-md border' /></td>";
+                                        echo "<td class='flex gap-2'>
+            <button 
+                class='btn btn-primary btn-sm edit-btn'
+                data-id='{$row['party_id']}'
+                data-name='{$row['party_name']}'
+                data-abbreviation='{$abbr}'
+                data-description='{$row['description']}'
+                data-img='{$row['party_img']}'>
+                Edit
+            </button>
+            <button 
+                class='btn btn-secondary btn-sm delete-btn'
+                data-id='{$row['party_id']}'>
+                Delete
+            </button>
+        </td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center'>No parties registered yet.</td></tr>";
+                                }
+
+                                $conn->close();
+                                ?>
                             </tbody>
                         </table>
                     </div>
-
-
-
                 </div>
             </div>
 
@@ -169,5 +186,6 @@
     </div>
     <script type="module" src="js/actions.js"></script>
 </body>
+
 
 </html>

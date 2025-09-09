@@ -1,3 +1,6 @@
+<?php
+include "../db_connect.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +48,11 @@
                     <i class="fa-solid fa-check-to-slot text-4xl"></i>
                 </div>
 
-                <h1 class="text-6xl font-[700]">1,238</h1>
+                <h1 class="text-6xl font-[700]">
+                    <?php
+                    include "countvoters.php";
+                    ?>
+                </h1>
                 <p class="text-base">Votes Gathered From This PC</p>
             </div>
         </div>
@@ -55,12 +62,16 @@
             <div class="card-body">
                 <div class="w-full flex justify-between items-center">
                     <h1 class="text-2xl">
-                        Active Candidates
+                        Total Candidates
                     </h1>
                     <i class="fa-solid fa-person text-4xl"></i>
                 </div>
 
-                <h1 class="text-6xl font-[700]">24</h1>
+                <h1 class="text-6xl font-[700]">
+                    <?php
+                    include "countcandidates.php";
+                    ?>
+                </h1>
                 <p class="text-base">Running This Elections</p>
             </div>
         </div>
@@ -75,7 +86,11 @@
                     <i class="fa-solid fa-people-group text-4xl"></i>
                 </div>
 
-                <h1 class="text-6xl font-[700]">2</h1>
+                <h1 class="text-6xl font-[700]">
+                    <?php
+                    include "countparties.php";
+                    ?>
+                </h1>
                 <p class="text-base">Registered This Elections</p>
             </div>
         </div>
