@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link / rel="icon" href="../public/psits_logo.png">
+    <link rel="icon" href="../public/psits_logo.png">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Font Awesome (latest 6.x) -->
@@ -116,7 +116,15 @@ JOIN Parties pa ON c.party_id = pa.party_id
                                         echo "<td class='max-w-xs truncate'>{$row['manifesto']}</td>";
                                         echo "<td><img src='../public/{$row['poster']}' alt='Poster' class='w-16 h-16 object-cover rounded-md border'></td>";
                                         echo "<td class='flex gap-2'>
-                <button class='btn btn-primary btn-sm edit-btn' data-id='{$row['candidate_id']}'>Edit</button>
+               <button 
+    class='btn btn-primary btn-sm edit-btn' 
+    data-id='{$row['candidate_id']}' 
+    data-name='{$row['candidate_name']}' 
+    data-position='{$row['position_name']}' 
+    data-manifesto='{$row['manifesto']}'
+>
+    Edit
+</button> 
                 <button class='btn btn-secondary btn-sm delete-btn' data-id='{$row['candidate_id']}'>Delete</button>
               </td>";
                                         echo "</tr>";
@@ -141,7 +149,7 @@ JOIN Parties pa ON c.party_id = pa.party_id
         include "drawer_side.php"
         ?>
     </div>
-    <script type="module" src="js/actions.js"></script>
+    <script type="module" src="js/candidate_actions.js"></script>
 </body>
 
 </html>

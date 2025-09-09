@@ -40,3 +40,14 @@ function showEdit(btn) {
 
   editModal.classList.remove("hidden");
 }
+
+const deleteBtns = document.querySelectorAll(".delete-btn");
+
+deleteBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const id = btn.dataset.id;
+    if (window.confirm("Are you sure you want to delete this party list?")) {
+      window.location.href = `deletepartylist.php?id=${id}`;
+    }
+  });
+});

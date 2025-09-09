@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     VALUES ('$party_name', '$description', '$dbFilePath')";
 
             if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Party registered successfully!'); window.location.href=window.location.href;</script>";
+                echo "<script>alert('Party registered successfully!'); window.location.href='/psits-voting/admin/partylist.php';</script>";
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }

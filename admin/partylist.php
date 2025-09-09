@@ -184,7 +184,7 @@
         include "drawer_side.php"
         ?>
     </div>
-    <script type="module" src="js/actions.js"></script>
+    <script type="module" src="js/partylist_actions.js"></script>
 </body>
 
 

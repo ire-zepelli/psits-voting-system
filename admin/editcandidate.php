@@ -4,7 +4,7 @@
     <div class="w-120 bg-white rounded-xl p-5 z-30 fixed mt-10">
         <h1 class="text-xl font-[700]">Edit Candidate</h1>
         <p>Update the candidate's information.</p>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="grid grid-cols-2 gap-4">
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend text-sm">First Name</legend>
@@ -23,7 +23,7 @@
                 <legend class="fieldset-legend text-sm">Position</legend>
 
 
-                <select name="position" id="position" class="select w-full max-h-40 overflow-y-hidden">
+                <select name="edit_position" id="position" class="select w-full max-h-40 overflow-y-hidden">
                     <option>President</option>
                     <option>VP-Internal</option>
                     <option>VP-External</option>
@@ -41,7 +41,7 @@
 
             <fieldset class="fieldset">
                 <legend class="fieldset-legend text-sm">Candidate Poster</legend>
-                <input type="file" class="file-input file-input-ghost" required />
+                <input type="file" class="file-input file-input-ghost" name="candidate_poster" required />
             </fieldset>
             <!-- Buttons -->
             <div class="flex justify-end gap-3 mt-6">
