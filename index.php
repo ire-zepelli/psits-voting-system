@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        .font-luckiest { font-family: "Luckiest Guy", cursive; }
+        .font-luckiest {
+            font-family: "Luckiest Guy", cursive;
+        }
     </style>
 </head>
+
 <body>
-    <?php include ("header.php"); ?>
+    <?php include("header.php"); ?>
 
     <section class="flex items-center justify-center px-10 py-8 bg-white text-black rounded-t-3xl">
         <div class="flex flex-col h-[551px] w-[650px] bg-white">
@@ -28,10 +32,11 @@
             </button>
         </div>
         <div class="mt-10 md:mt-0">
-            <img src="images/bepopic.png" alt="B.E.P.O" class="h-[678px] w-[678px]">
+            <img src="public/bepo_vote.png" alt="B.E.P.O" class="h-[678px] w-[678px]">
         </div>
     </section>
 
-    <?php include ("footer.php"); ?>
+    <?php include("footer.php"); ?>
 </body>
+
 </html>
